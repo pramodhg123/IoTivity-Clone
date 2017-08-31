@@ -21,3 +21,4 @@ addons:
     build_command:   "scons TARGET_ARCH=x86"
     branch_pattern: master
 
+script: "scons TARGET_ARCH=x86"
