@@ -21,4 +21,4 @@ addons:
     build_command:   "scons TARGET_ARCH=x86"
     branch_pattern: master
 
-script: "scons TARGET_ARCH=x86"
+script: "git clone https://github.com/01org/tinycbor.git extlibs/tinycbor/tinycbor -b v0.4.1" && "scons TARGET_ARCH=x86"
