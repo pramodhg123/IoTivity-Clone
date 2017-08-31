@@ -1,15 +1,19 @@
-i{
-  "sudo": "required",
-  "language": "generic",
-  "services": [
-    "docker"
-  ],
-  "script": [
-    "DOW=\"$(date \"+%u\")\"",
-    "test \"$TRAVIS_EVENT_TYPE\" = \"cron\" && for d in 2 4 6; do [[ \"$d\" == \"$DOW\" ]] && exit 0 || true; done",
-    "docker run --env COVERITY_SCAN_NOTIFICATION_EMAIL --env COVERITY_SCAN_TOKEN --env COVERITY_DRY_RUN iotivity-clone"
-  ],
-  "group": "stable",
-  "dist": "trusty",
-  "os": "linux"
-}
+language: cpp
+compiler:
+  - gcc
+
+env:
+  global:
+   # The next declaration is the encrypted COVERITY_SCAN_TOKEN, created
+   #   via the "travis encrypt" command using the project repo's public key
+    - secure: "*my secured token for coverity"
+
+addons:
+    coverity_scan:
+      project:
+        name: "iotivity-clone"
+      notification_email: phg@graniteriverlabs.com
+      build_command_prepend: ""
+      build_command: "scons TARGET_ARCH=x86"
+      branch_pattern: master
+
