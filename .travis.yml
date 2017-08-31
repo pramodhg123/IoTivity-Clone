@@ -21,7 +21,7 @@ addons:
       name: "pramodhg123/iotivity-clone"
       description: "Scan IoTivity"
     notification_email: phg@graniteriverlabs.com
-    build_command:   "travis_wait 180 scons TARGET_ARCH=x86_64 -j 16"
+    build_command:   "scons TARGET_ARCH=x86_64 -j 16"
     branch_pattern: master
 
-script: "travis_wait 180 scons TARGET_ARCH=x86_64 -j 16"
+script: "scons TARGET_ARCH=x86_64 -j 16"
