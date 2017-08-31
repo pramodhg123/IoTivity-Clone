@@ -11,6 +11,9 @@ env:
 before_install:
       - echo -n | openssl s_client -connect scan.coverity.com:443 | sed -ne '/-BEGIN CERTIFICATE-/,/-END CERTIFICATE-/p' | sudo tee -a /etc/ssl/certs/ca-
       - sudo apt-get install -y libboost-dev libboost-program-options-dev libboost-thread-dev uuid-dev libexpat1-dev libglib2.0-dev libsqlite3-dev libcurl4-gnutls-dev
+      - git clone https://github.com/01org/tinycbor.git extlibs/tinycbor/tinycbor -b v0.4.1
+      - git clone https://github.com/ARMmbed/mbedtls.git extlibs/mbedtls/mbedtls -b mbedtls-2.4.2
+      
 
 addons:
   coverity_scan:
@@ -18,7 +21,6 @@ addons:
       name: "pramodhg123/iotivity-clone"
       description: "Scan IoTivity"
     notification_email: phg@graniteriverlabs.com
-    build_command_prepend: "git clone https://github.com/01org/tinycbor.git extlibs/tinycbor/tinycbor -b v0.4.1"
     build_command:   "scons TARGET_ARCH=x86"
     branch_pattern: master
 
