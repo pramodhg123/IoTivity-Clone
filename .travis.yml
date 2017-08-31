@@ -17,8 +17,8 @@ addons:
       name: "pramodhg123/iotivity-clone"
       description: "Scan IoTivity"
     notification_email: phg@graniteriverlabs.com
-    build_command_prepend: ""
+    build_command_prepend: "git clone https://github.com/01org/tinycbor.git extlibs/tinycbor/tinycbor -b v0.4.1"
     build_command:   "scons TARGET_ARCH=x86"
     branch_pattern: master
 
-script: "git clone https://github.com/01org/tinycbor.git extlibs/tinycbor/tinycbor -b v0.4.1" && "scons TARGET_ARCH=x86"
+script: "scons TARGET_ARCH=x86"
