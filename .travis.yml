@@ -1,4 +1,3 @@
-
 language: cpp
 compiler:
   - gcc
@@ -27,7 +26,7 @@ addons:
       name: "pramodhg123/iotivity-clone"
       description: "Scan IoTivity"
     notification_email: phg@graniteriverlabs.com
-    build_command:   "scons TARGET_ARCH=x86_64 -j 2"
+    build_command:   "scons TARGET_ARCH=x86_64 -j 16 TEST=0"
     branch_pattern: master
 
-script: "scons TARGET_ARCH=x86_64 -j 2"
+script: "scons TARGET_ARCH=x86_64 -j 16 TEST=0"
