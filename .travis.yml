@@ -1,3 +1,4 @@
+
 language: cpp
 compiler:
   - gcc
@@ -9,6 +10,11 @@ env:
    - secure: "fcGMpwhjQzyjaALd/w1OhRnIjGKRLGISKXlTH/VlSoWnz7cWv5wcXwBNb0GtRKuk25cW9MnpUQS8p2NHW1DEtxJeQ5IvR/JP5xVbCbyn9w0DrYWszD6+ICK+gl1IgoLyE/6oHgEEivd8U4O28mCPfnbxPEtkT1vR9pmXvfrhtwo5vQHp+Fwj/ccl16qgyzbPcF+I4jv/DRTWFVCLDgucewW3zodn6no/NI0sloyKVnJiqNlnbwJhRsASF2Xqd1x58AGNkWvlndjYR3mgUiA75JzMzbNM9U8pG5ZimsqAYGi7Gzcox/4m/y6V208j7MtDCOaf4AzJmujXZnzlSar8LFE+tjU1GIdN/SKFAi0WILzr31nWYB9dcI6P2yClyFzJ38HPxrxKKtz/YoYaGfhW9dOsegO5EXoRTbZzLk8we4M1E1Docx/ChEkktU+IVKwldqpyPTar7yaoYA8QU5Q/pwR+hkhIT3A/7/oerJv6JjLO2mma9Bdc+WiW4x07kCUxPYvW7ARy0qnNLM9J/G++/0MSj0wQ6D1kEMziAyOV6q6MTihhrtR+ovTI3NPFtBVYagHaLgs0qO/Kb7qHGZqoqcg9tYPUnEhCTbeQnWWbPEePUNdGI9c2Ku52Mw7ILh6DtdAAMPzOrW+kDMjRHHZf9rFmyXhEII0Wyl3okEly76E="
 
 before_install:
+      - sudo fallocate -l 4G /swapfile
+      - sudo chmod 600 /swapfile
+      - sudo mkswap /swapfile
+      - sudo swapon /swapfile
+      - sudo sysctl vm.swappiness=10
       - echo -n | openssl s_client -connect scan.coverity.com:443 | sed -ne '/-BEGIN CERTIFICATE-/,/-END CERTIFICATE-/p' | sudo tee -a /etc/ssl/certs/ca-
       - sudo apt-get install -y libboost-dev libboost-program-options-dev libboost-thread-dev uuid-dev libexpat1-dev libglib2.0-dev libsqlite3-dev libcurl4-gnutls-dev
       - git clone https://github.com/01org/tinycbor.git extlibs/tinycbor/tinycbor -b v0.4.1
@@ -21,7 +27,7 @@ addons:
       name: "pramodhg123/iotivity-clone"
       description: "Scan IoTivity"
     notification_email: phg@graniteriverlabs.com
-    build_command:   "scons TARGET_ARCH=x86_64 -j 8"
+    build_command:   "scons TARGET_ARCH=x86_64 -j 2"
     branch_pattern: master
 
-script: "scons TARGET_ARCH=x86_64 -j 8"
+script: "scons TARGET_ARCH=x86_64 -j 2"
